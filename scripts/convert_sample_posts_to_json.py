@@ -13,7 +13,7 @@ out = '{ '
 for event, elem in context:
     if event == "end" and elem.tag == "row":
         d = dict(elem.items())
-        out += d['Id'] + ': ' + str(d) + ',' 
+        out += 'row' + ': ' + str(d) + ',' 
         # ... process book elements ...
         root.clear()
 
