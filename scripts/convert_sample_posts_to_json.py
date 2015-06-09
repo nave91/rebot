@@ -2,7 +2,7 @@ from xml.etree.cElementTree import iterparse
 import json
 
 # get an iterable and turn it into an iterator
-context = iter(iterparse("./sample.xml", events=("start", "end")))
+context = iter(iterparse("../sample/stackexchange-posts-sample-big.xml", events=("start", "end")))
 
 # get the root element
 event, root = next(context)
