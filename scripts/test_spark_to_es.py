@@ -12,7 +12,7 @@ es_write_conf = {
     "es.resource" : "titanic/fail"
 } 
 some_data=sc.parallelize([1,2,3,4])
-some_data_mapped_to_keys=res.map(lambda x: ('key', {'name': str(x), 'sim':0.22}))
+some_data_mapped_to_keys=some_data.map(lambda x: ('key', {'name': str(x), 'sim':0.22}))
 some_data_mapped_to_keys.collect()
 
 
