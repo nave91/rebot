@@ -65,7 +65,60 @@
 			  <section>
 			    <h2>Text Parsing</h2>
 			    <pre><code data-trim contenteditable>
-				
+				<?xml version="1.0" encoding="utf-8"?>
+				<posts>
+				  <row Id="4" PostTypeId="1" AcceptedAnswerId="7" CreationDate="2008-07-31T21:42:52.667" Score="322" ViewCount="21888" Body="&lt;p&gt;I want to use a track-bar to change a form's opacity.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;This is my code:&lt;/p&gt;&#xA;&#xA;&lt;pre&gt;&lt;code&gt;decimal trans = trackBar1.Value / 5000;&#xA;this.Opacity = trans;&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;When I try to build it, I get this error:&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;  &lt;p&gt;Cannot implicitly convert type 'decimal' to 'double'.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;I tried making &lt;code&gt;trans&lt;/code&gt; a &lt;code&gt;double&lt;/code&gt;, but then the control doesn't work. This code has worked fine for me in VB.NET in the past. &lt;/p&gt;&#xA;" OwnerUserId="8" LastEditorUserId="451518" LastEditorDisplayName="Rich B" LastEditDate="2014-07-28T10:02:50.557" LastActivityDate="2014-12-20T17:18:47.807" Title="When setting a form's opacity should I use a decimal or double?" Tags="&lt;c#&gt;&lt;winforms&gt;&lt;type-conversion&gt;&lt;opacity&gt;" AnswerCount="13" CommentCount="1" FavoriteCount="27" CommunityOwnedDate="2012-10-31T16:42:47.213" />
+				  <row Id="6" PostTypeId="1" ... />
+				  <row Id="7" PostTypeId="2" ... />
+				</posts>				
+			    </pre></code>
+			  </section>
+			  <section>
+			  <h2>Text Parsing</h2>
+			    <pre><code data-trim contenteditable>
+				{
+				"body": "<p>I want to use a track-bar to change a form's opacity.<\/p>\n\n<p>This is my code:<\/p>\n\n<pre><code>decimal trans = trackBar1.Value \/ 5000;\nthis.Opacity = trans;\n<\/code><\/pre>\n\n<p>When I try to build it, I get this error:<\/p>\n\n<blockquote>\n  <p>Cannot implicitly convert type 'decimal' to 'double'.<\/p>\n<\/blockquote>\n\n<p>I tried making <code>trans<\/code> a <code>double<\/code>, but then the control doesn't work. This code has worked fine for me in VB.NET in the past. <\/p>\n",
+				"score": "322",
+				"posttypeid": "1",
+				"answer": "7",
+				"id": "4",
+				"snippets": "<code>decimal trans = trackBar1.Value \/ 5000;\nthis.Opacity = trans;\n<\/code><code>trans<\/code><code>double<\/code>"
+				}				
+			    </pre></code>
+			  </section>
+                          <section>
+			  <h2>Output</h2>
+			    <pre><code data-trim contenteditable>
+				GET /test-morn/_search?q=body:missing				
+			    </pre></code>
+			  </section>
+                          <section>
+			  <h2>Output</h2>
+			    <pre><code data-trim contenteditable>
+				{
+				"took": 2,
+				"timed_out": false,
+				"_shards": {
+				"total": 5,
+				"successful": 5,
+				"failed": 0
+				},
+				"hits": {
+				"total": 1,
+				"max_score": 0.10980196,
+				"hits": [
+				{
+				"_index": "test-morn",
+				"_score": 0.10980196,
+				"_source": {
+				"id": "6",
+				"snippets": "<code>div</code><code>div</code><code>div</code><code>0</code><code>CSS</code>",
+				"answer": "31",
+				"posttypeid": "1",
+				"score": "140",
+				"body": "<p>I have an absolutely positioned <code>div</code> containing several children, one of which is a relatively positioned <code>div</code>"}}]
+				  }
+				  }
 			    </pre></code>
 			  </section>
                           <!-- <section> -->
