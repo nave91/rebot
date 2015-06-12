@@ -9,7 +9,7 @@ es = "ec2-52-8-185-215.us-west-1.compute.amazonaws.com:9200"
 hdfs = "ec2-52-8-194-49.us-west-1.compute.amazonaws.com:9000"
 es_write_conf = {
     "es.nodes" : es,
-    "es.resource" : "wtf/me"
+    "es.resource" : "test-morn/mouuu"
 } 
 
 def mapper(line):
@@ -21,7 +21,7 @@ def mapper(line):
         d[key] = value
     return ('key', d)
 
-file = sc.textFile("hdfs://"+hdfs+"/raw/sample.csv")
+file = sc.textFile("hdfs://"+hdfs+"/output/test/part-*")
 
 words = file.map(lambda line: mapper(line))
 
