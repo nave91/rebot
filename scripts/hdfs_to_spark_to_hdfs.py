@@ -2,7 +2,7 @@ from pyspark import SparkContext, SparkConf
 
 folder_name = "raw/"
 out_folder_name = "output/"
-file_name = "stackexchange-posts-sample.xml"
+file_name = "Posts.xml"
 hdfs = "ec2-52-8-194-49.us-west-1.compute.amazonaws.com:9000"
 
 def jsoner(row):
@@ -53,7 +53,7 @@ def load_row(row):
 def fetch_line(line):
     if line[-2] == '/':
         import xml.etree.ElementTree as ET
-        row = ET.fromstring(line)
+        row = ET.fromstring(line.encode('UTF-8'))
         return load_row(row)
 
 
@@ -65,4 +65,4 @@ file = sc.textFile("hdfs://"+hdfs+"/"+folder_name+file_name)
 
 lines = file.map(lambda line: fetch_line(line))
 lines.collect()
-lines.saveAsTextFile("hdfs://"+hdfs+"/"+out_folder_name+'test')
+lines.saveAsTextFile("hdfs://"+hdfs+"/"+out_folder_name+'jsons')
