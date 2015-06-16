@@ -9,7 +9,7 @@ es = "ec2-52-8-185-215.us-west-1.compute.amazonaws.com:9200"
 hdfs = "ec2-52-8-194-49.us-west-1.compute.amazonaws.com:9000"
 es_write_conf = {
     "es.nodes" : es,
-    "es.resource" : "test-morn/mouuu"
+    "es.resource" : "test/mooo"
 } 
 
 def mapper(line):

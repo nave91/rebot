@@ -1,9 +1,10 @@
 from pyspark import SparkContext, SparkConf
 
-folder_name = "raw/"
-out_folder_name = "output/"
+folder_name = "input/"
+out_folder_name = "json/"
+#file_name = "stackexchange-posts-sample.xml"
 file_name = "Posts.xml"
-hdfs = "ec2-52-8-194-49.us-west-1.compute.amazonaws.com:9000"
+hdfs = "ec2-52-8-214-93.us-west-1.compute.amazonaws.com:9000"
 
 def jsoner(row):
     header = ['id','posttypeid','score','answer','body','snippets']
@@ -64,5 +65,4 @@ sc = SparkContext(conf=conf)
 file = sc.textFile("hdfs://"+hdfs+"/"+folder_name+file_name)
 
 lines = file.map(lambda line: fetch_line(line))
-lines.collect()
-lines.saveAsTextFile("hdfs://"+hdfs+"/"+out_folder_name+'jsons')
+lines.saveAsTextFile("hdfs://"+hdfs+"/"+out_folder_name+'middles')
