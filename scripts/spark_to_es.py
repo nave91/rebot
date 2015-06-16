@@ -7,7 +7,7 @@ sc = SparkContext(conf=conf)
 
 es = "ec2-52-8-185-215.us-west-1.compute.amazonaws.com:9200"
 hdfs = "ec2-52-8-214-93.us-west-1.compute.amazonaws.com:9000"
-es_writeOB_conf = {
+es_write_conf = {
     "es.nodes" : es,
     "es.resource" : "test/mooo"
 } 
@@ -24,8 +24,6 @@ def mapper(line):
 file = sc.textFile("hdfs://"+hdfs+"/json/middles/part-*")
 
 words = file.map(lambda line: mapper(line))
-
-words.collect()
 
 words.saveAsNewAPIHadoopFile(
     path='-', 
