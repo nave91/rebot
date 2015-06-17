@@ -9,6 +9,6 @@ for r in results:
     sys.stderr.write('.')
     if '[INFO]' in r['snippets']:
         with open('logs.json','a') as f:
-            f.write(repr(r))
+            f.write(repr(r)+'\n')
             
 
