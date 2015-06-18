@@ -112,12 +112,12 @@ class StackSparkJob(SparkJob):
         self.dics = self.file.map(self.stack_parser.map_xml)
 
     def save(self):
-        self.ques = self.dics.filter(lambda dic: dic['posttypeid'] == 1)
-        self.ques = self.dics.map(lambda d: jsoner(d))
-        self.ques.saveAsTextFile(self.json_ques_folder_address)
-        self.ans = self.dics.filter(lambda dic: dic['posttypeid'] == 2)
-        self.ans = self.dics.map(lambda d: jsoner(d))
-        self.ans.saveAsTextFile(self.json_ans_folder_address)
+        self.ques_dict = self.dics.filter(lambda dic: 'posttypeid' in dic.keys()).filter(lambda dic: dic['posttypeid'] == '1')
+        self.ques_json = self.ques_dict.map(lambda d: jsoner(d))
+        self.ques_json.saveAsTextFile(self.json_ques_folder_address)
+        self.ans_dict = self.dics.filter(lambda dic: 'posttypeid' in dic.keys()).filter(lambda dic: dic['posttypeid'] == '2')
+        self.ans_json = self.ans_dict.map(lambda d: jsoner(d))
+        self.ans_json.saveAsTextFile(self.json_ans_folder_address)
 
 
     def run(self):
