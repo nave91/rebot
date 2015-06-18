@@ -5,6 +5,9 @@ from HTMLParser import HTMLParser
 from pyspark import SparkContext, SparkConf
             
 
+def jsoner(dic):
+    return json.dumps(dic)
+
 class StackPostsBodyParser(HTMLParser):
     def __init__(self, *args, **kwargs):
         HTMLParser.__init__(self, *args, **kwargs)
@@ -51,30 +54,33 @@ class StackParser(Parser):
 
     def load(self, input):
         self.input = input
+        self.output = {}
         if self.input[-2] == '/':
-            row = ET.fromstring(line.encode('UTF-8'))
-            self.output = {}
-            for header, value in self.input.attrib.items():
+            row = ET.fromstring(self.input.encode('UTF-8'))
+            for header, value in row.items():
                 self.output[header] = value
-            parser= self.body_parser.feed(self.output['Body'])
-            self.output['snippets'] = parser.snippets
+            self.body_parser.feed(self.output['Body'])
+            self.output['snippets'] = self.body_parser.snippets
             return self.output
 
-    def json_output(self):
+    def format(self):
+        if self.output == {}:
+            return {}
         out = {}
-        for actual, given in self.header.items():
-            if given == 'AcceptedAnswerId':
-                if given in self.output.keys():
-                    out[actual] = self.output[given]
+        for _i, _xml in self.header.items():
+            if _xml == 'AcceptedAnswerId':
+                if _xml in self.output.keys():
+                    out[_i] = self.output[_xml]
                 else:
-                    out[actual] = 'NULL'
+                    out[_i] = 'NULL'
                 continue
-            out[actual] = row[given]
-        return json.dumps(out)
-
+            out[_i] = self.output[_xml]
+        self.output = out
+        return self.output
+    
     def map_xml(self, xml_line):
         self.load(xml_line)
-        return self.json_output()
+        return self.format()
 
     
 class SparkJob:
@@ -85,15 +91,15 @@ class SparkJob:
 class StackSparkJob(SparkJob):
     def __init__(self):
         SparkJob.__init__(self)
-        self.xml_folder_name = conf.STACKEXCHANGE_XML_FOLDER_NAME
-        self.xml_file_name = conf.STACKEXCHANGE_XML_FILE_NAME
         self.xml_file_address = "hdfs://" + self.server + "/" +\
-                            self.xml_folder_name + self.xml_file_name
+                                conf.STACKEXCHANGE_XML_FOLDER_NAME +\
+                                conf.STACKEXCHANGE_XML_FILE_NAME
+                         
+        self.json_ques_folder_address = "hdfs://" + self.server + "/" +\
+                                        conf.STACKEXCHANGE_JSON_QUES_FOLDER_NAME
+        self.json_ans_folder_address = "hdfs://" + self.server + "/" +\
+                                        conf.STACKEXCHANGE_JSON_ANS_FOLDER_NAME
         
-        self.json_folder_name = conf.STACKEXCHANGE_JSON_FOLDER_NAME
-        self.json_folder_address = "hdfs://" + self.server + "/" +\
-                                   self.json_folder_name
-
         self.conf.setAppName(self.__class__.__name__)
         self.spark_context = SparkContext(conf=self.conf)
         
@@ -103,14 +109,20 @@ class StackSparkJob(SparkJob):
         
 
     def map(self):
-        self.lines = self.file.map(lambda line: self.stack_parser.map_xml(line))
+        self.dics = self.file.map(self.stack_parser.map_xml)
 
-    def reduce(self):
-        self.lines.saveAsTextFile(self.json_folder_address)
+    def save(self):
+        self.ques = self.dics.filter(lambda dic: dic['posttypeid'] == 1)
+        self.ques = self.dics.map(lambda d: jsoner(d))
+        self.ques.saveAsTextFile(self.json_ques_folder_address)
+        self.ans = self.dics.filter(lambda dic: dic['posttypeid'] == 2)
+        self.ans = self.dics.map(lambda d: jsoner(d))
+        self.ans.saveAsTextFile(self.json_ans_folder_address)
+
 
     def run(self):
         self.map()
-        self.reduce()
+        self.save()
 
 if __name__ == '__main__':
     
