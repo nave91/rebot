@@ -1,7 +1,0 @@
-from bluebook import conf 
-
-class SparkJob:
-    def __init__(self):
-        pass
-
-print conf.HDFS_FQDN
