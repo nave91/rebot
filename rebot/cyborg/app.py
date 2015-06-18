@@ -2,6 +2,7 @@ import json
 import xml.etree.ElementTree as ET
 from bluebook import conf 
 from HTMLParser import HTMLParser
+from pyspark import SparkContext, SparkConf
             
 
 class StackPostsBodyParser(HTMLParser):
@@ -29,7 +30,6 @@ class StackPostsBodyParser(HTMLParser):
 
 class Parser:
     def __init__(self):
-        self.type = 'parser_generic'
         self.input = '' # line of xml
         self.output = '' # jsoned string
 
@@ -39,7 +39,6 @@ class Parser:
 
 class StackParser(Parser):
     def __init__(self):
-        self.type = 'parser_stackexchange'
         self.body_parser = StackPostsBodyParser()
         self.header = {
             'id': 'Id',
@@ -73,8 +72,48 @@ class StackParser(Parser):
             out[actual] = row[given]
         return json.dumps(out)
 
+    def map_xml(self, xml_line):
+        self.load(xml_line)
+        return self.json_output()
+
     
 class SparkJob:
     def __init__(self):
-        pass
+        self.server = conf.HDFS_FQDN
+        self.conf = SparkConf()
 
+class StackSparkJob(SparkJob):
+    def __init__(self):
+        SparkJob.__init__(self)
+        self.xml_folder_name = conf.STACKEXCHANGE_XML_FOLDER_NAME
+        self.xml_file_name = conf.STACKEXCHANGE_XML_FILE_NAME
+        self.xml_file_address = "hdfs://" + self.server + "/" +\
+                            self.xml_folder_name + self.xml_file_name
+        
+        self.json_folder_name = conf.STACKEXCHANGE_JSON_FOLDER_NAME
+        self.json_folder_address = "hdfs://" + self.server + "/" +\
+                                   self.json_folder_name
+
+        self.conf.setAppName(self.__class__.__name__)
+        self.spark_context = SparkContext(conf=self.conf)
+        
+        self.file = self.spark_context.textFile(self.xml_file_address)
+
+        self.stack_parser = StackParser()
+        
+
+    def map(self):
+        self.lines = self.file.map(lambda line: self.stack_parser.map_xml(line))
+
+    def reduce(self):
+        self.lines.saveAsTextFile(self.json_folder_address)
+
+    def run(self):
+        self.map()
+        self.reduce()
+
+if __name__ == '__main__':
+    
+    ssj = StackSparkJob()
+    ssj.run()
+    
