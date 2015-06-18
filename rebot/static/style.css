@@ -1,0 +1,84 @@
+body, html
+	  {
+	      background-color: #EDEDED !important;
+	  }
+
+.intro
+{
+    text-align: center;
+    padding-top: 7%;
+    padding-bottom: 7%;
+}
+
+.intro h1
+{
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.intro h5
+{
+    text-transform: uppercase;
+    background-color: #f5f5f5;
+    padding: 10px;
+    color: #333333;
+    display: inline-block;
+    font-size: 1.2rem;
+}
+
+
+.about .col
+{
+    margin-bottom: 24px;
+}
+
+.about h5
+{
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.about h6
+{
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 45px;
+}
+
+.about hr
+{
+    width: 40px;
+    margin-bottom: 45px;
+}
+
+.about .card
+{
+    text-align: center;
+}
+
+.tabs
+{
+    padding-top: 0%;
+}
+
+.page
+{
+    height: 100%;
+}
+
+.left
+{
+    text-align: left;
+    height: 90%;
+    
+}
+.right-top
+{
+    height: 43%;
+}
+
+.right-bottom
+{
+    height: 43%;
+}
