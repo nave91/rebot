@@ -7,7 +7,7 @@ from pyspark import SparkContext, SparkConf
 def jsoner(dic):
     return json.dumps(dic)
 
-def stackexchange_parser(xml_row):
+def stackexchange_xml_parser(xml_row):
     class StackPostsBodyParser(HTMLParser):
         def __init__(self, *args, **kwargs):
             HTMLParser.__init__(self, *args, **kwargs)
@@ -42,7 +42,7 @@ def stackexchange_parser(xml_row):
     return output
 
 
-def stackexchange_formatter(dic):
+def stackexchange_xml_formatter(dic):
     if dic == {}:
         return {}
     out = {}
@@ -56,13 +56,11 @@ def stackexchange_formatter(dic):
         out[_i] = dic[_xml]
     return out
     
-def stackexchange_mapper(xml_line):
-    dic = stackexchange_parser(xml_line)
-    return stackexchange_formatter(dic)
+def stackexchange_xml_mapper(xml_line):
+    dic = stackexchange_xml_parser(xml_line)
+    return stackexchange_xml_formatter(dic)
 
-
-if __name__ == '__main__':
-    
+def stackexchange_xml_spark_job():
     server = bluebook_conf.HDFS_FQDN
     conf = SparkConf()
 
@@ -75,19 +73,22 @@ if __name__ == '__main__':
     json_ans_folder_address = "hdfs://" + server + "/" +\
                               bluebook_conf.STACKEXCHANGE_JSON_ANS_FOLDER_NAME
         
-    conf.setAppName('test')
+    conf.setAppName('stackexchange_xml_spark_job')
     spark_context = SparkContext(conf=conf)
         
     file = spark_context.textFile(xml_file_address)
-    ques = file.map(stackexchange_mapper)\
+    ques = file.map(stackexchange_xml_mapper)\
                .filter(lambda dic: 'posttypeid' in dic.keys())\
                .filter(lambda dic: dic['posttypeid'] == '1')\
                .map(lambda d: jsoner(d))
-    ans = file.map(stackexchange_mapper)\
+    ans = file.map(stackexchange_xml_mapper)\
                .filter(lambda dic: 'posttypeid' in dic.keys())\
                .filter(lambda dic: dic['posttypeid'] == '2')\
                .map(lambda d: jsoner(d))
     ques.saveAsTextFile(json_ques_folder_address)
     ans.saveAsTextFile(json_ans_folder_address)
-        
+
+
+if __name__ == '__main__':    
+    stackexchange_xml_spark_job()
     
