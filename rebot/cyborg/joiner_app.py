@@ -18,9 +18,13 @@ def stackexchange_json_parser(line):
     
 def stackexchange_json_mapper(line, _type):
     dic = stackexchange_json_parser(line)
-    return (_type, dic)
+    if _type == 'ques':
+        return (dic['answer'], {'ques': dic})
+    else:
+        return (dic['id'], {'ans': dic})
 
-def stackexchange_json_spark_job(line):
+def stackexchange_json_spark_job():
+    server = bluebook_conf.HDFS_FQDN
     conf = SparkConf().setAppName("stackexchange_json_spark_job")
     spark_context = SparkContext(conf=conf)
     
@@ -34,14 +38,16 @@ def stackexchange_json_spark_job(line):
     ques_file = spark_context.textFile(json_ques_folder_address)
     ans_file = spark_context.textFile(json_ans_folder_address)
     
-    ques_tups = file.map(lambda line: stackexchange_json_mapper(line, 'ques'))
-    ans_tups = file.map(lambda line: stackexchange_json_mapper(line, 'ans'))
+    ques_tups = ques_file.map(lambda line: stackexchange_json_mapper(line, 'ques'))
+    ans_tups = ans_file.map(lambda line: stackexchange_json_mapper(line, 'ans'))
 
-    # DO SOMETHING
-
+    ques_ans = ques_tups.join(ans_tups).map(lambda x: ('key', x))
     ques_ans.saveAsNewAPIHadoopFile(
-    path='-', 
-    outputFormatClass="org.elasticsearch.hadoop.mr.EsOutputFormat",
-    keyClass="org.apache.hadoop.io.NullWritable", 
-    valueClass="org.elasticsearch.hadoop.mr.LinkedMapWritable", 
-    conf=es_write_conf)
+        path='-', 
+        outputFormatClass="org.elasticsearch.hadoop.mr.EsOutputFormat",
+        keyClass="org.apache.hadoop.io.NullWritable", 
+        valueClass="org.elasticsearch.hadoop.mr.LinkedMapWritable", 
+        conf=es_write_conf)
+    
+if __name__ == '__main__':
+    stackexchange_json_spark_job()

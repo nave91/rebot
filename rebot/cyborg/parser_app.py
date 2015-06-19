@@ -3,6 +3,9 @@ import xml.etree.ElementTree as ET
 from bluebook import conf as bluebook_conf 
 from HTMLParser import HTMLParser
 from pyspark import SparkContext, SparkConf
+
+header = bluebook_conf.STACKEXCHANGE_HEADER_MAP
+
             
 def jsoner(dic):
     return json.dumps(dic)
@@ -46,7 +49,7 @@ def stackexchange_xml_formatter(dic):
     if dic == {}:
         return {}
     out = {}
-    for _i, _xml in bluebook_conf.STACKEXCHANGE_HEADER_MAP.items():
+    for _i, _xml in header.items():
         if _xml == 'AcceptedAnswerId':
             if _xml in dic.keys():
                 out[_i] = dic[_xml]
