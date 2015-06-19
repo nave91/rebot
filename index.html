@@ -46,6 +46,21 @@
 			      <small>Created by <a href="http://naveenl.com">Naveen K Lekkalapudi</a> / <a href="http://twitter.com/nave91">@nave91</a></small>
 			    </p>
 			  </section>
+ 			    <section id="fragments1">
+			      <h2>New?</h2>
+                              <p><span class="fragment">
+                                <img src="./img/terminator.jpg" alt="terminator repair">
+                              </span></p>
+                            </section>
+                            <section>
+                              <img src="./img/papers.png" alt="list of papers in history">
+                            </section>
+			  </section>
+                                
+                          <section data-transition="fade" data-background="#4d7e65" data-background-transition="zoom">
+                            <h2>Solution</h2>
+                            <img src="./img/overlap.png" alt="Overlap of sets">
+                          </section>
 			  
 			  <section>
                             <h2>Old Flow Chart</h2>
@@ -86,14 +101,14 @@
 "posttypeid": "1",
 "answer": "7",
 "id": "4",
-"snippets": "<.code>decimal trans = trackBar1.Value <\/code>",
+"snippets": "<.code>decimal trans = trackBar1.Value; double x =1.0; <\/code>",
 }			
 			    </pre></code>
 			  </section>
                           <section>
 			    <h2>Output</h2>
 			    <pre><codedata-trim contenteditable>
-GET /test-morn/_search?q=body:missing
+GET /test-morn/_search?q=body:double
 			    </pre></code>
 			  </section>
                           <section>
@@ -116,7 +131,7 @@ GET /test-morn/_search?q=body:missing
 	"_score": 0.10980196,
 	"_source": {
 	  "id": "6",
-	  "snippets": "<.code>div</c.ode><.code>div</c.ode><.code>div</c.ode><.code>0</c.ode><.code>CSS</c.ode>",
+	  "snippets": "<.code>div</c.ode><.code>div</c.ode><.code>div</c.ode><.code>0</c.ode>double<.code>CSS</c.ode>",
           "answer": "31",
           "posttypeid": "1",
           "score": "140",
@@ -126,6 +141,40 @@ GET /test-morn/_search?q=body:missing
 			    </pre></code>
 			  </section>
                           <section>
+                            <section id="fragments2">
+                              <h2>How does it work?</h2>
+                              <h3>(Or more like wut?)</h3>
+                              <p><span class="fragment">1. Install rebot</span></p>
+                              <p><span class="fragment">2. Misconfigure any service</span></p>
+                              <p><span class="fragment">3. Service shoots logs</span></p>
+                              <p><span class="fragment">4. Rebot detects mistakes using logs</span></p>
+                              <p><span class="fragment">5. Rebot looks for answers on web</span></p>
+                              <p><span class="fragment"><strike>6. Rebot fixes your mistake</strike></span></p>
+                              <p><span class="fragment">6. Returns link to answer for now.</span></p>
+                            </section>
+                            <section>
+                              <h2>Queries?</h2>
+                              <h3>(Why am I distributing?)</h3>
+                              <p><span class="fragment">1. Your <i>personal</i> Google will not fit in a traditional relational database.</span></p>
+                              <p><span class="fragment">2. Logs are also massive. (Papertrail, loggly, ..)</span></p>
+                              <h3>(What are my queries?)</h3>
+                              <p><span class="fragment">1. Find the most relevant error.</span></p>
+                              <p><span class="fragment">2. Find most viable solution for given error.</span></p>
+                            </section>
+                          </section>
+			  <section>
+                            <h2>Short Demo</h2>
+                            <img src="./img/rebot.gif" alt="Demo with one log">
+                          </section>
+			  <section>
+                            <h2>Stream Demo</h2>
+                            <img src="./img/rebot_cont.gif" alt="Demo with stream of log">
+                          </section>
+
+                          <section>
+                            <h2>Hopefully..</h2>
+                            <img src="./img/machina.gif" alt="giffy">
+                          </section>
 
 			  <section>
                             <h2>About me</h2>
