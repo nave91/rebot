@@ -6,7 +6,11 @@ out_folder_name = "json/"
 file_name = "Posts.xml"
 hdfs = "ec2-52-8-214-93.us-west-1.compute.amazonaws.com:9000"
 
-def jsoner(row):
+def jsoner(dic):
+    import json
+    return json.dumps(dic)
+
+def dicter(row):
     header = ['id','posttypeid','score','answer','body','snippets']
     header_map = ['Id','PostTypeId','Score','AcceptedAnswerId','Body','snippets']
     out = {}
@@ -18,8 +22,7 @@ def jsoner(row):
                 out[header[ind]] = 'NULL'
             continue
         out[header[ind]] = row[h]
-    import json
-    return json.dumps(out)
+    return out
 
 def load_row(row):
     from HTMLParser import HTMLParser
@@ -48,7 +51,7 @@ def load_row(row):
     parser = PostsBodyParser()
     parser.feed(new_row['Body'])
     new_row['snippets'] = parser.codes
-    return jsoner(new_row)
+    return dicter(new_row)
 
 
 def fetch_line(line):
@@ -64,5 +67,9 @@ sc = SparkContext(conf=conf)
 
 file = sc.textFile("hdfs://"+hdfs+"/"+folder_name+file_name)
 
-lines = file.map(lambda line: fetch_line(line))
+lines = file.map(lambda line: fetch_line(line))\
+            .filter(lambda dic: dic is not None)\
+            .filter(lambda dic: dic['posttypeid'] == '1')\
+            .map(lambda d: jsoner(d))
+
 lines.saveAsTextFile("hdfs://"+hdfs+"/"+out_folder_name+'middles')
