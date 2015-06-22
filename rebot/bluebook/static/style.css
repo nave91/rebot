@@ -54,6 +54,11 @@ body, html
 
 .about .card
 {
+    
+    text-align: center;
+}
+.card-content
+{
     text-align: center;
 }
 
@@ -81,4 +86,9 @@ body, html
 .right-bottom
 {
     height: 43%;
+}
+
+div a
+{
+    color: inherit;
 }
