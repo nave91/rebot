@@ -1,11 +1,12 @@
-from flask import Flask, render_template
+from flask import render_template
 
-app = Flask(__name__) 
+from bluebook import app
 
 @app.route("/")
 @app.route("/index")  
 def hello(): 
     return render_template('index.html')
+
 
 if __name__ == "__main__": 
 
