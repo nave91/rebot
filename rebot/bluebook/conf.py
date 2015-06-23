@@ -23,3 +23,6 @@ STACKEXCHANGE_HEADER_MAP = {
     'snippets': 'snippets'
 }
 
+AVAILABLE_ACTIONS = {
+    'search for error': '/api/v1/error/'
+}

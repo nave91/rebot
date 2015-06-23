@@ -22,6 +22,7 @@ def read_stdin():
     for line in fileinput.input():
         results = call_es(line)
         store_link(results)
+
 if __name__ == '__main__':
     read_stdin()
 
