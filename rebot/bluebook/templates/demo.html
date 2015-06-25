@@ -1,35 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <script src="../static/prism.js"></script>
-  <link href="../static/prism.css" rel="stylesheet">
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="../static/materialize.min.css">
-  <!-- Compiled and minified JavaScript -->
-  <script src="../static/materialize.min.js"></script>
-  <link type="text/css" rel="stylesheet" href="../static/style.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body>
-<div class="navbar-fixed">
-    <nav>
-        <ul class="tabs">
-                <li class="tab col s3"><a class="active" href="/#about">About</a></li>
-                <li class="tab col s3"><a href="./search">Search</a></li>
-                <li class="tab col s3"><a href="./demo">Live Demo</a></li>
-                <li class="tab col s3"><a href="./#gifdemo">How does it work?</a></li>
-                <li class="tab col s3"><a href="./#gifdemocont">Streaming logs?</a></li>
-        </ul>
-    </nav>
-</div>
+{% extends "base.html" %}
+{% block title %}Demo{% endblock %}
+{% block content %}
+<br>
+<a href="/" ><input class="btn left" value="Go back"></a>
 <div class="row">
   <div class="col s12"> 
     <form action="" method="post" name="login">
       {{ form.hidden_tag() }}
-        <div class="input-field col s6">
-      <div class="card back-color">
+      <div class="input-field col s6">
+	<div class="card back-color">
 	  <pre><code class="language-markup">
 Traceback (most recent call last):
   File "pyspark/hbase/hbase_tests.py", line 81, in <module>
@@ -46,14 +25,13 @@ Traceback (most recent call last):
     return self._jvm.HBaseSQLContext(self._jsc.sc())
   File "/shared/pyjava/python/lib/py4j-0.8.2.1-src.zip/py4j/java_gateway.py", line 726, in __getattr__
 py4j.protocol.Py4JError: Trying to call a package.
-	    </code></pre>
-        </div>
-	  
-	  <input class="btn right" onclick="Materialize.toast('I am a toast', 4000)" type="submit" value="Do it!">
-        </div>
+	  </code></pre>
+        </div>	  
+	<input class="btn right" onclick="Materialize.toast('I am a toast', 4000)" type="submit" value="Boom!">
+      </div>
     </form>
-    <div class="col s6">
-      <div class="card blue-grey darken-1" style="height:60%">
+    <div class="col s6" style="padding-top:1%">
+      <div class="card blue-grey darken-1" style="height:60%;">
         <div class="card-content white-text ">
 	  <div class="left">{</div>
 	  <table>
@@ -69,8 +47,7 @@ py4j.protocol.Py4JError: Trying to call a package.
 	  <a>Api callbacks</a>
         </div>
       </div>
-      </div>
+    </div>
   </div>   
 </div> 
-</body>
-</html>
+{% endblock %}

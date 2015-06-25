@@ -1,26 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="../static/style.css">
-</head>
-<body>
-  <li class="tab col s3"><a href="./demo">Live Demo</a></li>
-     
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block content %}
 <div class="navbar-fixed">
     <nav>
         <ul class="tabs">
-                <li class="tab col s3"><a class="active" href="#about">About</a></li>
-		<li class="tab col s3"><a href="./search">Search</a></li>
-                <li class="tab col s3"><a href="./demo">Live Demo</a></li>
-                <li class="tab col s3"><a href="#gifdemo">How does it work?</a></li>
-                <li class="tab col s3"><a href="#gifdemocont">Streaming logs?</a></li>
+                <li class="tab col s3"><a class="active" href="{{ url_for('index') }}#about">About</a></li>
+		<li class="tab col s3"><a href="{{ url_for('index') }}#gifdemo">How does it work?</a></li>
+                <li class="tab col s3"><a href="{{ url_for('index') }}#gifdemocont">Streaming logs?</a></li>
         </ul>
     </nav>
 </div>
@@ -55,16 +41,16 @@
                   <ul class="collapsible">
                     <li class="active">
                       <a href="#gifdemo"><div class="collapsible-header"><i class="mdi-av-web"></i>Gif demo</div></a>
-                      <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
                     </li>
                     <li>
                         <a href="#gifdemocont"><div class="collapsible-header"><i class="mdi-editor-format-align-justify"></i>Streaming gif demo</div></a>
-			<div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-                    </li>
+		    </li>
+		    <li>
+                        <a href="./search"><div class="collapsible-header"><i class="mdi-editor-format-align-justify"></i>Sample Search</div></a>
+		    </li>
 		    <li>
                         <a href="./demo"><div class="collapsible-header"><i class="mdi-editor-format-align-justify"></i>Live Demo</div></a>
-			<div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-                    </li>
+		    </li>
                   </ul>
                 </div>
               </div>
@@ -79,6 +65,4 @@
 
     </div>
 </div>
-    
-</body>
-</html>
+{% endblock %}
