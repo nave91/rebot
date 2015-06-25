@@ -3,6 +3,11 @@ body, html
     background-color: #EDEDED;
 }
 
+.back-color
+{
+    background-color: #EDEDED;
+}
+
 .intro
 {
     text-align: center;
