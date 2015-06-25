@@ -30,7 +30,6 @@ def live_demo():
 def search(): 
     form = SearchForm()
     if request.method == 'POST' and form.validate():
-        import ipdb; ipdb.set_trace()
         result = call_server(form.logs.data)
         result = str(result)
         return render_template('search.html', form=form, result=result)
