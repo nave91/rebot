@@ -5,6 +5,8 @@ from flask.ext.wtf import Form
 from wtforms import TextAreaField
 from wtforms.validators import DataRequired
 
+from lib import search_error
+
 def call_server(error):
     server = 'http://localhost:5000/api/v1/error'
     params = {
@@ -30,7 +32,6 @@ def live_demo():
 def search(): 
     form = SearchForm()
     if request.method == 'POST' and form.validate():
-        result = call_server(form.logs.data)
-        result = str(result)
+        result = search_error(form.logs.data)
         return render_template('search.html', form=form, result=result)
-    return render_template('search.html', form=form)
+    return render_template('search.html', form=form, result={})
