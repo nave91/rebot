@@ -1,5 +1,9 @@
+<!DOCTYPE html>
 <html>
 <head>
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
   <!-- Compiled and minified JavaScript -->
@@ -11,15 +15,12 @@
     <nav>
         <ul class="tabs">
                 <li class="tab col s3"><a class="active" href="#about">About</a></li>
-                <li class="tab col s3"><a href="#stream">Demo</a></li>
+		<li class="tab col s3"><a href="./search" target="./search">Search</a></li>
+                <li class="tab col s3"><a href="./demo">Live Demo</a></li>
                 <li class="tab col s3"><a href="#gifdemo">How does it work?</a></li>
-                <li class="tab col s3"><a href="#gifdemocont">Does it work for streaming logs?</a></li>
+                <li class="tab col s3"><a href="#gifdemocont">Streaming logs?</a></li>
         </ul>
     </nav>
-</div>
-<div class="intro cyan darken-4 z-depth-1">
-    <h1 class="grey-text text-lighten-5">Rebot</h1>
-    <h5 clas="grey lighten-4 grey-text text-darken-1">Automate Debugging</h5>
 </div>
 <div class="row">
     <div class="col s12">
@@ -29,11 +30,6 @@
               <h5>About me</h5>
               <hr>
               <div class="row">
-                <div class="col s12 m4 l4">
-                  <h6>Motivation</h6>
-                  <p>Rebot is a client side "bot" of self repairing service. We make mistakes, as developers, as devops, as sysadmins. Every role has a range of experience and with the full stack of some thousand tools out there, it is hard to be expert at everything.</p> 
-                    <p> Rebot can help avoid overcome this problem by being your personal search bot. Condensed from being repair bot, rebot quietly listens to your logs for errors and shoots out solutions/shows you links to the most viable solutions that are going to work.</p>
-                </div>
                 <div class="col s12 m4 l4">
                   <h6>Profile</h6>
                   <div class="card blue-grey darken-1">
@@ -48,6 +44,11 @@
                   </div>
                 </div>
                 <div class="col s12 m4 l4">
+                  <h6>Motivation</h6>
+                  <p>Rebot is a client side "bot" of self repairing service. We make mistakes, as developers, as devops, as sysadmins. Every role has a range of experience and with the full stack of some thousand tools out there, it is hard to be expert at everything.</p> 
+                    <p> Rebot can help avoid overcome this problem by being your personal search bot. Condensed from being repair bot, rebot quietly listens to your logs for errors and shoots out solutions/shows you links to the most viable solutions that are going to work.</p>
+                </div>
+                <div class="col s12 m4 l4">
                   <h6>Useful Links</h6>
                   <ul class="collapsible">
                     <li class="active">
@@ -56,43 +57,22 @@
                     </li>
                     <li>
                         <a href="#gifdemocont"><div class="collapsible-header"><i class="mdi-editor-format-align-justify"></i>Streaming gif demo</div></a>
-                      <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+			<div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                    </li>
+		    <li>
+                        <a href="./demo"><div class="collapsible-header"><i class="mdi-editor-format-align-justify"></i>Live Demo</div></a>
+			<div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
         </div>
-        <div id="stream" class= "col s12 page">
-            <div class="row" style="padding-top:4%">
-                <div class="card-content white-text">
-
-                    <div class="col s12 m6">
-                        <div class="card left blue-grey darken-1">
-                            <span class="card-title">Incoming logs</span>
-                                <p>I am a very simple card. I am good at containing small bits of information.
-                                    I am convenient because I require little markup to use effectively.</p>
-                        </div>
-                    </div>
-                
-                    <div class="col s6 z-depth-1">
-                        <div class="card right-top blue-grey darken-1">
-                            asd
-                        </div>
-                    </div>
-                    <div class="col s6 z-depth-1">
-                        <div class="card right-bottom blue-grey darken-1">
-                            asd
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div id="gifdemo" class= "col s12 page">
-        <a href="#gifdemo"><img src="../static/rebot.gif" style="padding-top:5%"></a>
+        <a href="#gifdemo"><img src="../static/rebot.gif" ></a>
         </div>
         <div id="gifdemocont" class= "col s12 page">
-        <a href="#gifdemocont"><img src="../static/rebot_cont.gif" style="padding-top:5%"></a>
+        <a href="#gifdemocont"><img src="../static/rebot_cont.gif"></a>
         </div>
 
     </div>
