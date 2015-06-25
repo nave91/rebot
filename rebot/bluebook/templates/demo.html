@@ -8,7 +8,7 @@
     <form action="" method="post" name="login">
       {{ form.hidden_tag() }}
       <div class="input-field col s6">
-	<div class="card back-color">
+	<div class="card back-color" onmouseenter="Materialize.toast('Sample log for demo', 1000)">
 	  <pre><code class="language-markup">
 Traceback (most recent call last):
   File "pyspark/hbase/hbase_tests.py", line 81, in <module>
@@ -27,11 +27,11 @@ Traceback (most recent call last):
 py4j.protocol.Py4JError: Trying to call a package.
 	  </code></pre>
         </div>	  
-	<input class="btn right" onclick="Materialize.toast('I am a toast', 4000)" type="submit" value="Boom!">
+	<input class="btn right" onclick="Materialize.toast('Sending API Call to backend', 1000)" type="submit" value="Boom!">
       </div>
     </form>
     <div class="col s6" style="padding-top:1%">
-      <div class="card blue-grey darken-1" style="height:60%;">
+      <div class="card blue-grey darken-1" style="height:60%;" onmouseenter="Materialize.toast('Api call back', 1000)">
         <div class="card-content white-text ">
 	  <div class="left">{</div>
 	  <table>

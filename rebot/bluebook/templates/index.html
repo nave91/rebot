@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Index{% endblock %}
 {% block content %}
-<div class="navbar-fixed">
+<div class="navbar">
     <nav>
         <ul class="tabs">
-                <li class="tab col s3"><a class="active" href="{{ url_for('index') }}#about">About</a></li>
-		<li class="tab col s3"><a href="{{ url_for('index') }}#gifdemo">How does it work?</a></li>
-                <li class="tab col s3"><a href="{{ url_for('index') }}#gifdemocont">Streaming logs?</a></li>
+          <li class="tab col s3"><a class="active" href="{{ url_for('index') }}#about">About</a></li>
+	  <li class="tab col s3"><a href="{{ url_for('index') }}#gifdemo">Does it work?</a></li>
+          <li class="tab col s3"><a href="{{ url_for('index') }}#gifdemocont">Streaming logs?</a></li>
         </ul>
     </nav>
 </div>
@@ -39,13 +39,7 @@
                 <div class="col s12 m4 l4">
                   <h6>Useful Links</h6>
                   <ul class="collapsible">
-                    <li class="active">
-                      <a href="#gifdemo"><div class="collapsible-header"><i class="mdi-av-web"></i>Gif demo</div></a>
-                    </li>
                     <li>
-                        <a href="#gifdemocont"><div class="collapsible-header"><i class="mdi-editor-format-align-justify"></i>Streaming gif demo</div></a>
-		    </li>
-		    <li>
                         <a href="./search"><div class="collapsible-header"><i class="mdi-editor-format-align-justify"></i>Sample Search</div></a>
 		    </li>
 		    <li>
@@ -57,10 +51,10 @@
             </div>
         </div>
         <div id="gifdemo" class= "col s12 page">
-        <a href="#gifdemo"><img src="../static/rebot.gif" ></a>
+          <a href="#gifdemo"><img class="responsive-img" src="../static/rebot.gif"></a>
         </div>
         <div id="gifdemocont" class= "col s12 page">
-        <a href="#gifdemocont"><img src="../static/rebot_cont.gif"></a>
+          <a href="#gifdemocont"><img class="responsive-img" src="../static/rebot_cont.gif"></a>
         </div>
 
     </div>

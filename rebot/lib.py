@@ -17,12 +17,12 @@ def search_error(error):
 
 def call_es(error):
     conn = ES(bluebook_conf.ES_FQDN)
-    q = QueryStringQuery("ques.snippets:{}".format(error))
+    q = QueryStringQuery("body:{}".format(error))
     results = conn.search(query=q)
     return results
 
 def clean_error(error):
-    shortened_error = error[-500:]
+    shortened_error = error[:500]
     cleaned_error = re.sub('[\W_]+', ' ', shortened_error)
     return cleaned_error
 
