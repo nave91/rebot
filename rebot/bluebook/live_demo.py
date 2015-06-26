@@ -40,7 +40,7 @@ def live_demo():
                   "  File '/shared/pyjava/python/lib/py4j-0.8.2.1-src.zip/py4j/java_gateway.py', line 726, in __getattr__" +\
                   "                  py4j.protocol.Py4JError: Trying to call a package."
     if request.method == 'POST':
-        result = search_error(default_log)
+        result = search_error('pyspark')
         return render_template('demo.html', form=form, default_log=default_log, result=result)
     return render_template('demo.html', form=form, default_log=default_log, result={})
 
