@@ -80,7 +80,7 @@ if __name__ == '__main__':
             line = ast.literal_eval(lines[i])
             out = line['snippets']
             if '[ERROR]' not in out:
-                print_log(out, 2)
+                print_log(out, 5)
             if args['v'] > 2:
                 sys.stderr.write("#"*20)
                 sys.stderr.write("#"*10+' log '+str(i)+"#"*10)
