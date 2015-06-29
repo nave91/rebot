@@ -3,9 +3,9 @@ import ast
 from pyspark import SparkContext, SparkConf
 from bluebook import conf as bluebook_conf
 
-es_write_conf = {
+stackoverflow_es_write_conf = {
     "es.nodes": bluebook_conf.ES_FQDN,
-    "es.resource": bluebook_conf.ES_INDEX + "/" + bluebook_conf.ES_TYPE
+    "es.resource": bluebook_conf.ES_INDEX + "/" + bluebook_conf.SO_ES_TYPE
 }
 
 def stackexchange_json_parser(line):
@@ -43,7 +43,7 @@ def stackexchange_json_spark_job():
         outputFormatClass="org.elasticsearch.hadoop.mr.EsOutputFormat",
         keyClass="org.apache.hadoop.io.NullWritable", 
         valueClass="org.elasticsearch.hadoop.mr.LinkedMapWritable", 
-        conf=es_write_conf)
+        conf=stackoverflow_es_write_conf)
     
 if __name__ == '__main__':
     stackexchange_json_spark_job()

@@ -42,6 +42,7 @@ def stackexchange_xml_parser(xml_row):
             output[header] = value
         body_parser.feed(output['Body'])
         output['snippets'] = body_parser.snippets
+        output['sourcetype'] = 'stackoverflow'
     return output
 
 
