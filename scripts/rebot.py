@@ -13,8 +13,8 @@ from pyes import *
 #     return results
 
 def call_server(error):
-    # server = 'http://ec2-52-8-219-37.us-west-1.compute.amazonaws.com/api/v1/error'
-    server = 'http://localhost:5000/api/v1/error'
+    server = 'http://ec2-52-8-219-37.us-west-1.compute.amazonaws.com/api/v1/error'
+    # server = 'http://localhost:5000/api/v1/error'
     params = {
         'error_log': error
     }
