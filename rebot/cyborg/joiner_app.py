@@ -23,6 +23,10 @@ def stackexchange_json_mapper(line, _type):
         return (dic['id'], dic)
 
 def stackexchange_json_spark_job():
+    """
+    Spark job to convert json data from hdfs into ques and ans.
+    Result is written into elasticsearch for text based search from user.
+    """
     server = bluebook_conf.HDFS_FQDN
     conf = SparkConf().setAppName("stackexchange_json_spark_job")
     spark_context = SparkContext(conf=conf)    
@@ -32,6 +36,8 @@ def stackexchange_json_spark_job():
     json_ans_folder_address = "hdfs://" + server + "/" +\
                               bluebook_conf.STACKEXCHANGE_JSON_ANS_FOLDER_NAME +\
                               "/part-*"
+    
+    # Ques and ans files are seperately read from hdfs
     ques_file = spark_context.textFile(json_ques_folder_address)
     ans_file = spark_context.textFile(json_ans_folder_address)
     ques_tups = ques_file.map(lambda line: stackexchange_json_mapper(line, 'ques'))

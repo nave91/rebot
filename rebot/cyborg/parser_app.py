@@ -4,13 +4,18 @@ from bluebook import conf as bluebook_conf
 from HTMLParser import HTMLParser
 from pyspark import SparkContext, SparkConf
 
-header = bluebook_conf.STACKEXCHANGE_HEADER_MAP
 
+header = bluebook_conf.STACKEXCHANGE_HEADER_MAP
             
 def jsoner(dic):
     return json.dumps(dic)
 
 def stackexchange_xml_parser(xml_row):
+    """
+    Parses stackexchange type xml file into json.
+    Also finds code snippets using tag <code> and stores it in a 
+    new index.
+    """
     class StackPostsBodyParser(HTMLParser):
         def __init__(self, *args, **kwargs):
             HTMLParser.__init__(self, *args, **kwargs)
@@ -47,6 +52,10 @@ def stackexchange_xml_parser(xml_row):
 
 
 def stackexchange_xml_formatter(dic):
+    """
+    Finds all accepted answers and places NULL for questions with no
+    accepted answers
+    """
     if dic == {}:
         return {}
     out = {}
@@ -61,6 +70,9 @@ def stackexchange_xml_formatter(dic):
     return out
     
 def stackexchange_xml_mapper(xml_line):
+    """
+    One point handler of all xml to json map operations.
+    """
     dic = stackexchange_xml_parser(xml_line)
     return stackexchange_xml_formatter(dic)
 
@@ -81,6 +93,10 @@ def stackexchange_xml_spark_job():
     spark_context = SparkContext(conf=conf)
         
     file = spark_context.textFile(xml_file_address)
+
+    # Ques and Ans files are stored seperately depending of their 'posttypeid'
+    # Ques -> posttypeid == 1
+    # Ans -> posttypeid == 2
     ques = file.map(stackexchange_xml_mapper)\
                .filter(lambda dic: 'posttypeid' in dic.keys())\
                .filter(lambda dic: dic['posttypeid'] == '1')\
