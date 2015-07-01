@@ -66,7 +66,7 @@ def stackexchange_xml_formatter(dic):
             else:
                 out[_i] = 'NULL'
             continue
-        out[_i] = dic[_xml]
+        out[_i] = dic[_xml] if _xml in dic.keys() else 'NULL'
     return out
     
 def stackexchange_xml_mapper(xml_line):
