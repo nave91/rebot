@@ -105,5 +105,16 @@ div a
 
 .pad-left
 {
+    padding-left: 10%;
+}
+.pad-tooleft
+{
     padding-left: 15%;
+}
+noborder
+{
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }

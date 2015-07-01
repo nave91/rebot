@@ -46,12 +46,11 @@ AVAILABLE_ACTIONS = {
 
 # Features to be shot out to user querying through API
 FEATURES = [
-    'Score',
-    'ViewCount',
-    'LastActivityDate',
-    'LastEditDate',
-    'Tags',
-    'AnswerCount',
-    'CommentCount',
-    'FavoriteCount'
+    'snippets',
+    'score',
+    'viewcount',
+    'tags',
+    'answercount',
+    'commentcount',
+    'favoritecount'
 ]

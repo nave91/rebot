@@ -12,9 +12,17 @@ def search_error(error):
     results = call_es(cleaned_error)
     link = 'https://stackoverflow.com/a/' + str(results[0]['ans']['id'])
     num_results = len(results)
+    fea_header = bluebook_conf.FEATURES
+    ques_features = ans_features = {}
+    for h in fea_header:
+        ques_features[h] = results[0]['ques'][h] if h in results[0]['ques'].keys() else ''
+        ans_features[h] = results[0]['ans'][h] if h in results[0]['ans'].keys() else ''
     response = {
         'answer_link': link,
         'num_results': num_results,
+        'ques_features': ques_features,
+        'ans_features': ans_features,
+        'top_10': results[:10]
     }
     return response
 

@@ -43,8 +43,8 @@ def live_demo():
 
     if request.method == 'POST':
         result = search_error('pyspark')
-        return render_template('demo.html', form=form, default_log=default_log, result=result)
-    return render_template('demo.html', form=form, default_log=default_log, result={})
+        return render_template('demo.html', form=form, default_log=default_log, result=result, show=True)
+    return render_template('demo.html', form=form, default_log=default_log, result=None, show=False)
 
 
 @demo_page.route("/search", methods=['GET', 'POST'])  
@@ -52,5 +52,5 @@ def search():
     form = SearchForm()
     if request.method == 'POST' and form.validate():
         result = search_error(form.logs.data)
-        return render_template('search.html', form=form, result=result)
-    return render_template('search.html', form=form, result={})
+        return render_template('search.html', form=form, result=result, show=True)
+    return render_template('search.html', form=form, result=None, show=False)

@@ -35,11 +35,34 @@ py4j.protocol.Py4JError: Trying to call a package.
         <div class="card-content white-text ">
 	  <div class="left">{</div>
 	  <table>
-	    {% for key, value in result.iteritems() %}
+	    {% if show %}
 	    <tr>
-              <th> <div class="pad-left">{{ key }} :</div> </th><td> <a href="{{ value }}">{{ value }}</a> </td>
+              <th> <div class="pad-left">answer_link: </div> </th><td> <a href="{{ result['answer_link'] }}">{{ result['answer_link'] }}</a> </td>
 	    </tr>
-	    {% endfor %}
+	    <tr>
+              <th> <div class="pad-left">num_results: </div> </th><td>{{ result['num_results'] }}</td>
+	    </tr>
+	    <tr>
+              <th> <div class="pad-left">ques_features: {</div> </th>
+	      <td>
+	  	{% for key, value in result['ques_features'].iteritems() %}
+	  	<tr>
+	  	  <th> <div class="pad-tooleft">{{ key }}:</div> </th><td>{{ value[:50] }}..</td>
+	  	</tr>
+	  	{% endfor %}
+		
+              <th> <div class="pad-left">}</div> </th>
+	      </td>
+	    </tr>
+	    <tr>
+              <th> <div class="pad-left">ans_features:</div> </th>
+	      <td> .. </td>
+	    </tr>
+	    <tr>
+              <th> <div class="pad-left">top_10:</div> </th>
+	      <td> .. </td>
+	    </tr>
+	    {% endif %}
 	  </table>
           <div class="left">}</div>
 	</div>
