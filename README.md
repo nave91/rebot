@@ -27,6 +27,7 @@ Service depends on following packages of python
 * [WTForms](https://wtforms.readthedocs.org/en/latest/)
 * [Restful](https://flask-restful.readthedocs.org/en/0.3.3/)
 * [Pyes](https://elasticsearch-py.readthedocs.org/en/master/)
+* [Kafka-python](http://kafka-python.readthedocs.org/en/latest/usage.html)
 
 # Architecture
 

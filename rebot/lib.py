@@ -15,7 +15,7 @@ def search_error(error):
     features_set = bluebook_conf.features
     response = {
         'answer_link': link,
-        'num_results': num_results
+        'num_results': num_results,
         'feature_set': feature_set
     }
     return response
