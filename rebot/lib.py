@@ -12,11 +12,9 @@ def search_error(error):
     results = call_es(cleaned_error)
     link = 'https://stackoverflow.com/a/' + str(results[0]['ans']['id'])
     num_results = len(results)
-    features_set = bluebook_conf.features
     response = {
         'answer_link': link,
         'num_results': num_results,
-        'feature_set': feature_set
     }
     return response
 
