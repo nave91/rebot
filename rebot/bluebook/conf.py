@@ -30,10 +30,30 @@ STACKEXCHANGE_HEADER_MAP = {
     'answer': 'AcceptedAnswerId',
     'body': 'Body',
     'snippets': 'snippets',
-    'sourcetype': 'sourcetype'
+    'sourcetype': 'sourcetype',
+    'ans_score': 'Score',
+    'ans_viewcount': 'ViewCount',
+    'ans_lastactdate': 'LastActivityDate',
+    'ans_lasteditdate': 'LastEditDate',
+    'ques_tags': 'Tags',
+    'ques_respcount': 'AnswerCount',
+    'ans_commentcount': 'CommentCount',
+    'ans_favoritecount': 'FavoriteCount',
 }
 
 # Actions available using our API
 AVAILABLE_ACTIONS = {
     'search for error': '/api/v1/error/'
 }
+
+# Features to be shot out to user querying through API
+FEATURES = [
+    'Score',
+    'ViewCount',
+    'LastActivityDate',
+    'LastEditDate',
+    'Tags',
+    'AnswerCount',
+    'CommentCount',
+    'FavoriteCount'
+]
