@@ -43,6 +43,7 @@ def stackexchange_json_spark_job():
     ques_tups = ques_file.map(lambda line: stackexchange_json_mapper(line, 'ques'))
     ans_tups = ans_file.map(lambda line: stackexchange_json_mapper(line, 'ans'))
 
+    # Join accepted answers with their respective questions
     ques_ans = ques_tups.join(ans_tups).map(lambda x: (x[0], {'ques': x[1][0], 'ans': x[1][1]}))
     ques_ans.saveAsNewAPIHadoopFile(
         path='-', 

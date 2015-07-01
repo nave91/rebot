@@ -60,6 +60,7 @@ def stackexchange_xml_formatter(dic):
         return {}
     out = {}
     for _i, _xml in header.items():
+        # Only grab accepted ques and ans
         if _xml == 'AcceptedAnswerId':
             if _xml in dic.keys():
                 out[_i] = dic[_xml]

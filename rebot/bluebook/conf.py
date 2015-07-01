@@ -6,7 +6,7 @@ KAFKA_FQDN = "ec2-52-8-178-211.us-west-1.compute.amazonaws.com:9092"
 
 # Index for ques/ans to be written into elasticsearch
 # ES_INDEX = "rebot"
-ES_INDEX = "something"
+ES_INDEX = "fearebot"
 SO_ES_TYPE = "stackoverflow_accepted"
 
 # Kafka topic for ingestion of user logs
@@ -14,13 +14,13 @@ KAFKA_TOPIC = "test1"
 
 # Config for HDFS
 STACKEXCHANGE_XML_FOLDER_NAME = "input/"
-# STACKEXCHANGE_XML_FILE_NAME = "Posts.xml" 
-STACKEXCHANGE_XML_FILE_NAME = "stackexchange-posts-sample.xml" 
+STACKEXCHANGE_XML_FILE_NAME = "Posts.xml" 
+# STACKEXCHANGE_XML_FILE_NAME = "stackexchange-posts-sample.xml" 
 
-# STACKEXCHANGE_JSON_QUES_FOLDER_NAME = "jsons/stackoverflow/ques/"
-# STACKEXCHANGE_JSON_ANS_FOLDER_NAME = "jsons/stackoverflow/ans/"
-STACKEXCHANGE_JSON_QUES_FOLDER_NAME = "jsons/sample-ques/"
-STACKEXCHANGE_JSON_ANS_FOLDER_NAME = "jsons/sample-ans/"
+STACKEXCHANGE_JSON_QUES_FOLDER_NAME = "jsons/stackoverflowfea/ques/"
+STACKEXCHANGE_JSON_ANS_FOLDER_NAME = "jsons/stackoverflowfea/ans/"
+# STACKEXCHANGE_JSON_QUES_FOLDER_NAME = "jsons/sample-ques/"
+# STACKEXCHANGE_JSON_ANS_FOLDER_NAME = "jsons/sample-ans/"
 
 # Header for stackexchange mapping our own variables to stackoverflows schema
 STACKEXCHANGE_HEADER_MAP = {
@@ -31,14 +31,12 @@ STACKEXCHANGE_HEADER_MAP = {
     'body': 'Body',
     'snippets': 'snippets',
     'sourcetype': 'sourcetype',
-    'ans_score': 'Score',
-    'ans_viewcount': 'ViewCount',
-    'ans_lastactdate': 'LastActivityDate',
-    'ans_lasteditdate': 'LastEditDate',
-    'ques_tags': 'Tags',
-    'ques_respcount': 'AnswerCount',
-    'ans_commentcount': 'CommentCount',
-    'ans_favoritecount': 'FavoriteCount',
+    'score': 'Score',
+    'viewcount': 'ViewCount',
+    'tags': 'Tags',
+    'anscount': 'AnswerCount',
+    'commentcount': 'CommentCount',
+    'favoritecount': 'FavoriteCount',
 }
 
 # Actions available using our API
