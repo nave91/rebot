@@ -1,0 +1,5 @@
+deployment:
+  production:
+    branch: feature/ansible
+    commands:
+      - ./provision/deploy.sh
